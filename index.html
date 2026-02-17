@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZeroStart AI</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  height:100vh;
+}
+
+header{
+  background:#1e293b;
+  padding:15px;
+  text-align:center;
+  font-size:20px;
+  font-weight:bold;
+}
+
+#chat{
+  flex:1;
+  padding:10px;
+  overflow-y:auto;
+}
+
+.message{
+  margin:8px 0;
+  padding:10px;
+  border-radius:10px;
+  max-width:80%;
+}
+
+.user{
+  background:#2563eb;
+  align-self:flex-end;
+}
+
+.bot{
+  background:#334155;
+}
+
+footer{
+  display:flex;
+  padding:10px;
+  background:#1e293b;
+}
+
+input{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+}
+
+button{
+  margin-left:5px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#2563eb;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>ZeroStart AI 🤖</header>
+
+<div id="chat"></div>
+
+<footer>
+  <input type="text" id="input" placeholder="Escribe algo...">
+  <button onclick="send()">Enviar</button>
+</footer>
+
+<script>
+function send(){
+  let input = document.getElementById("input");
+  let text = input.value;
+  if(text === "") return;
+
+  addMessage(text,"user");
+
+  let response = getResponse(text);
+  setTimeout(()=>{
+    addMessage(response,"bot");
+  },500);
+
+  input.value="";
+}
+
+function addMessage(text,type){
+  let chat = document.getElementById("chat");
+  let div = document.createElement("div");
+  div.className = "message " + type;
+  div.innerText = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function getResponse(text){
+  text = text.toLowerCase();
+
+  if(text.includes("hola")) return "Hola 👋 Soy ZeroStart AI.";
+  if(text.includes("cómo estás")) return "Estoy funcionando perfectamente 🚀";
+  if(text.includes("quién eres")) return "Soy tu IA creada por ti 🔥";
+
+  return "Modo demo inteligente activado 🤖";
+}
+</script>
+
+</body>
+</html>
